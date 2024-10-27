@@ -13,7 +13,8 @@ class RabbitMQHandler(logging.Handler):
 
     def emit(self, record):
         log_entry = self.format(record)
-        self.channel.basic_publish(exchange=self.exchange, routing_key=self.routing_key, body=log_entry)
+        routing_key = f"{self.routing_key}.{record.levelname.lower()}"
+        self.channel.basic_publish(exchange=self.exchange, routing_key=routing_key, body=log_entry)
 
     def close(self):
         self.connection.close()
