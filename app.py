@@ -67,11 +67,8 @@ def view_logs():
     try:
         with open('logs.txt', 'r') as file:
             logs = file.read()
-            print("logs", logs)
-            app.logger.info(f"Viewed log files")
     except FileNotFoundError:
         logs = "No logs available."
-        print("No logs available.")
     return render_template("logs.html", logs=logs)
 
 if __name__ == "__main__":
